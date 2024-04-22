@@ -28,8 +28,10 @@ class App extends React.Component{
   render(){
     return (
       <div className="App">
-        <SubmitForm addTask={this.addTask}/>
-        <TasksList tasks={this.state.tasks} removeTask={this.removeTask}/>
+          <h1>Todo List</h1>
+          <h2>Welcome Gerald</h2>
+          <SubmitForm addTask={this.addTask}/>
+          <TasksList tasks={this.state.tasks} removeTask={this.removeTask}/>
       </div>
     );
   }

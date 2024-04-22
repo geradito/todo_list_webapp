@@ -1,7 +1,7 @@
 import React from 'react';
 import './Task.css';
 import {MdModeEditOutline} from "react-icons/md";
-import { MdCancel } from "react-icons/md";
+import { MdSave } from "react-icons/md";
 import {MdDone} from "react-icons/md";
 import { MdDelete  } from "react-icons/md";
 
@@ -12,10 +12,12 @@ class Task extends React.Component{
         this.toggleEditMode = this.toggleEditMode.bind(this);
         this.removeTask = this.removeTask.bind(this);
         this.markDone = this.markDone.bind(this);
+        this.handleChange = this.handleChange.bind(this);
 
         this.state = {
             backgroundColor: '',
-            editMode:false
+            editMode:false,
+            textValue:this.props.text
         }
        
     }
@@ -45,10 +47,8 @@ class Task extends React.Component{
         e.preventDefault();
     }
 
-    onTodoChange(value){
-        this.setState({
-             text: value
-        });
+    handleChange(e){
+        this.setState({textValue: e.target.value});
     }
 
     render(){
@@ -57,15 +57,15 @@ class Task extends React.Component{
                 <div className='task-container-background' style={{backgroundColor: this.state.backgroundColor}}>
                     <div className='task-term-container'>
                     {this.state.editMode ? (
-                            <input className='input' onChange={e => this.setState({ text: e.target.value })} defaultValue ={this.props.text}/>
+                            <input id="text" name="text" className='input' onChange={this.handleChange} defaultValue={this.state.textValue}/>
                         ) : (
-                            <h2 className='task-term'>{this.props.text}</h2>
+                            <h2 className='task-term'>{this.state.textValue}</h2>
                         )}                    
                     </div>
                     <div className='buttons-container'>
                         <button className='done-button' onClick={this.toggleEditMode}>
                             {this.state.editMode ? (
-                                <MdCancel />
+                                <MdSave />
                                 ) : (
                                     <MdModeEditOutline />
                             )}
